@@ -5,7 +5,7 @@ import { Loader2 } from 'lucide-react';
 export function TodoList({ todos, loading, error, onToggle, onDelete, onEdit }) {
   if (error) {
     return (
-      <div className="p-3 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl backdrop-blur-sm">
+      <div className="px-4 py-3 text-sm text-red-500 bg-red-50 dark:bg-red-500/10 border-b border-border/30">
         {error}
       </div>
     );
@@ -13,24 +13,24 @@ export function TodoList({ todos, loading, error, onToggle, onDelete, onEdit }) 
 
   if (loading) {
     return (
-      <div className="flex justify-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-primary drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]" />
+      <div className="flex justify-center py-8">
+        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
       </div>
     );
   }
 
   if (todos.length === 0) {
     return (
-      <div className="text-center py-12 border border-dashed border-black/10 dark:border-white/10 rounded-2xl bg-black/5 dark:bg-white/5">
+      <div className="text-center py-12 px-4">
         <p className="text-muted-foreground text-sm">
-          No active protocols found.
+          No tasks yet
         </p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-3">
+    <div>
       {todos.map((todo) => (
         <TodoItem
           key={todo.id}

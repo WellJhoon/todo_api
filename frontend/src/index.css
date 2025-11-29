@@ -4,74 +4,76 @@
  
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 240 10% 3.9%;
+    /* iOS Light Mode */
+    --background: 240 5% 96%; /* System Grouped Background #F2F2F7 */
+    --foreground: 0 0% 0%; /* Label Color */
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card: 0 0% 100%; /* Secondary System Grouped Background (Cards) #FFFFFF */
+    --card-foreground: 0 0% 0%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover-foreground: 0 0% 0%;
 
-    --primary: 262.1 83.3% 57.8%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 211 100% 50%; /* System Blue #007AFF */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
+    --secondary: 240 4% 90%; /* System Fill */
+    --secondary-foreground: 211 100% 50%;
 
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%; /* Secondary Label */
 
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --accent: 211 100% 50%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 348 100% 60%; /* System Red #FF3B30 */
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 262.1 83.3% 57.8%;
+    --border: 240 5% 84%; /* Separator #C6C6C8 */
+    --input: 240 5% 84%;
+    --ring: 211 100% 50%;
 
-    --radius: 1rem;
+    --radius: 0.75rem; /* iOS rounded corners approx 12px */
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    /* iOS Dark Mode */
+    --background: 0 0% 0%; /* System Background #000000 */
+    --foreground: 0 0% 100%;
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 240 2% 18%; /* Secondary System Grouped Background #1C1C1E */
+    --card-foreground: 0 0% 100%;
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 240 2% 18%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 263.4 70% 50.4%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 211 100% 50%; /* System Blue Dark Mode #0A84FF */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 240 2% 18%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 240 2% 18%;
+    --muted-foreground: 240 5% 64%;
 
-    --accent: 263.4 70% 50.4%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 211 100% 50%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 348 100% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 263.4 70% 50.4%;
+    --border: 240 5% 26%; /* Separator Dark #38383A */
+    --input: 240 5% 26%;
+    --ring: 211 100% 50%;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/60 dark:bg-black/30 backdrop-blur-md border border-black/5 dark:border-white/10 shadow-xl;
+    @apply bg-card/80 backdrop-blur-md border border-border shadow-xl;
   }
   .glass-input {
-    @apply bg-black/5 dark:bg-white/5 border-black/5 dark:border-white/10 focus:border-primary/50 focus:bg-black/10 dark:focus:bg-white/10 transition-all duration-300;
+    @apply bg-input border border-border focus:border-ring focus:ring-1 focus:ring-ring/20 transition-all duration-300;
   }
   .neon-glow {
     box-shadow: 0 0 10px theme('colors.primary.DEFAULT'), 0 0 20px theme('colors.primary.DEFAULT');
