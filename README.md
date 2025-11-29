@@ -16,15 +16,19 @@ El proyecto sigue una estructura modular y escalable:
 
 ```
 todo_api/
-├── app/
+├── app/                # Backend (FastAPI)
 │   ├── api/            # Endpoints de la API
 │   ├── core/           # Configuración general
-│   ├── crud/           # Operaciones de Base de Datos (Create, Read, Update, Delete)
+│   ├── crud/           # Operaciones de Base de Datos
 │   ├── db/             # Conexión y sesión de DB
-│   ├── models/         # Modelos SQLAlchemy (Tablas)
-│   ├── schemas/        # Esquemas Pydantic (Validación)
+│   ├── models/         # Modelos SQLAlchemy
+│   ├── schemas/        # Esquemas Pydantic
 │   └── main.py         # Punto de entrada
-├── requirements.txt    # Dependencias
+├── frontend/           # Frontend (React + Vite)
+│   ├── src/            # Código fuente React
+│   ├── public/         # Archivos estáticos
+│   └── package.json    # Dependencias Node.js
+├── requirements.txt    # Dependencias Python
 └── README.md
 ```
 
@@ -61,6 +65,18 @@ py -m uvicorn app.main:app --reload
 # Linux/Mac
 uvicorn app.main:app --reload
 ```
+
+### 5. Ejecutar el Frontend
+
+En una nueva terminal, navega a la carpeta `frontend`:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+La aplicación web estará disponible en `http://localhost:5173`.
 
 El servidor iniciará en `http://127.0.0.1:8000`.
 
