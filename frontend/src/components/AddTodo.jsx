@@ -21,7 +21,7 @@ export function AddTodo({ onAdd }) {
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Initialize new task protocol..."
         className={cn(
-          "glass-input relative flex h-14 w-full rounded-xl border bg-black/20 px-5 py-3 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-white/30 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/50 disabled:cursor-not-allowed disabled:opacity-50 pr-16 text-white"
+          "glass-input relative flex h-14 w-full rounded-xl border px-5 py-3 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/50 disabled:cursor-not-allowed disabled:opacity-50 pr-16 text-foreground"
         )}
       />
       <button

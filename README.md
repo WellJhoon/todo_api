@@ -6,57 +6,52 @@ Esta es una API RESTful simple para gestionar una lista de tareas (To-Do List), 
 
 *   **Python 3.10+**
 *   **FastAPI**: Framework web moderno y rápido.
+# Todo API con FastAPI
+
+Esta es una API RESTful simple para gestionar una lista de tareas (To-Do List), construida con Python y FastAPI. Este proyecto sirve como backend para una futura aplicación de React.
+
+## Tecnologías
+
+*   **Python 3.10+**
+*   **FastAPI**: Framework web moderno y rápido.
 *   **SQLAlchemy**: ORM para la base de datos.
 *   **SQLite**: Base de datos ligera (archivo local `todos.db`).
 *   **Pydantic**: Validación de datos.
 
 ## Estructura del Proyecto
 
-El proyecto sigue una estructura modular y escalable:
+El proyecto está organizado como un monorepo con backend y frontend separados:
 
 ```
 todo_api/
-├── app/                # Backend (FastAPI)
-│   ├── api/            # Endpoints de la API
-│   ├── core/           # Configuración general
-│   ├── crud/           # Operaciones de Base de Datos
-│   ├── db/             # Conexión y sesión de DB
-│   ├── models/         # Modelos SQLAlchemy
-│   ├── schemas/        # Esquemas Pydantic
-│   └── main.py         # Punto de entrada
-├── frontend/           # Frontend (React + Vite)
-│   ├── src/            # Código fuente React
-│   ├── public/         # Archivos estáticos
-│   └── package.json    # Dependencias Node.js
-├── requirements.txt    # Dependencias Python
+├── backend/            # API REST (FastAPI)
+│   ├── app/            # Código fuente Python
+│   ├── requirements.txt
+│   └── todos.db        # Base de datos SQLite
+├── frontend/           # Cliente Web (React + Vite)
+│   ├── src/
+│   ├── public/
+│   └── package.json
 └── README.md
 ```
 
 ## Instalación y Ejecución
 
-### 1. Clonar el repositorio (si aplica) o descargar el código
+### 1. Backend (Python/FastAPI)
 
-### 2. Crear un entorno virtual (Opcional pero recomendado)
+Navega a la carpeta `backend`:
 
 ```bash
-# Windows
-python -m venv .venv
-.\.venv\Scripts\Activate
-
-# Linux/Mac
-python3 -m venv .venv
-source .venv/bin/activate
+cd backend
 ```
 
-### 3. Instalar dependencias
+Activa tu entorno virtual (si está en la raíz superior `../.venv`) e instala dependencias:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Ejecutar el servidor
-
-Desde la carpeta raíz del proyecto (`todo_api`):
+Ejecuta el servidor:
 
 ```bash
 # Windows
@@ -66,19 +61,25 @@ py -m uvicorn app.main:app --reload
 uvicorn app.main:app --reload
 ```
 
-### 5. Ejecutar el Frontend
+El backend correrá en `http://127.0.0.1:8000`.
 
-En una nueva terminal, navega a la carpeta `frontend`:
+### 2. Frontend (React)
+
+Navega a la carpeta `frontend`:
 
 ```bash
-cd frontend
+cd ../frontend
+# o desde la raíz: cd frontend
+```
+
+Instala dependencias y ejecuta:
+
+```bash
 npm install
 npm run dev
 ```
 
 La aplicación web estará disponible en `http://localhost:5173`.
-
-El servidor iniciará en `http://127.0.0.1:8000`.
 
 ## Documentación de la API
 

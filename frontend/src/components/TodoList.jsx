@@ -21,7 +21,7 @@ export function TodoList({ todos, loading, error, onToggle, onDelete, onEdit }) 
 
   if (todos.length === 0) {
     return (
-      <div className="text-center py-12 border border-dashed border-white/10 rounded-2xl bg-white/5">
+      <div className="text-center py-12 border border-dashed border-black/10 dark:border-white/10 rounded-2xl bg-black/5 dark:bg-white/5">
         <p className="text-muted-foreground text-sm">
           No active protocols found.
         </p>

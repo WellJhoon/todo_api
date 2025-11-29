@@ -31,16 +31,16 @@ export function TodoItem({ todo, onToggle, onDelete, onEdit }) {
 
   if (isEditing) {
     return (
-      <div className="flex items-center gap-2 p-4 rounded-xl border border-primary/50 bg-white/10">
+      <div className="flex items-center gap-2 p-4 rounded-xl border border-primary/50 bg-background/50 backdrop-blur-sm">
         <input
           ref={inputRef}
           value={editTitle}
           onChange={(e) => setEditTitle(e.target.value)}
           onKeyDown={handleKeyDown}
           onBlur={handleSave}
-          className="flex-1 bg-transparent border-none outline-none text-base text-white placeholder:text-white/30"
+          className="flex-1 bg-transparent border-none outline-none text-base text-foreground placeholder:text-muted-foreground"
         />
-        <button onClick={() => setIsEditing(false)} className="text-muted-foreground hover:text-white">
+        <button onClick={() => setIsEditing(false)} className="text-muted-foreground hover:text-foreground">
           <X className="h-4 w-4" />
         </button>
       </div>
@@ -50,7 +50,7 @@ export function TodoItem({ todo, onToggle, onDelete, onEdit }) {
   return (
     <div
       className={cn(
-        "group flex items-center justify-between p-4 rounded-xl transition-all duration-300 border border-transparent hover:border-primary/20 hover:bg-white/5",
+        "group flex items-center justify-between p-4 rounded-xl transition-all duration-300 border border-transparent hover:border-primary/20 hover:bg-black/5 dark:hover:bg-white/5",
         todo.completed ? "opacity-50" : "hover:neon-glow"
       )}
     >
@@ -61,7 +61,7 @@ export function TodoItem({ todo, onToggle, onDelete, onEdit }) {
             "flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-md border-2 transition-all duration-300",
             todo.completed 
               ? "bg-primary border-primary text-white neon-glow" 
-              : "border-white/30 hover:border-primary text-transparent hover:text-primary/50"
+              : "border-black/10 dark:border-white/30 hover:border-primary text-transparent hover:text-primary/50"
           )}
         >
           <Check className={cn("h-4 w-4", todo.completed ? "scale-100" : "scale-0")} />
