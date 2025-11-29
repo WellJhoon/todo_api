@@ -48,14 +48,18 @@ export function useTodos() {
     }
   };
 
-  const editTodo = async (id, newTitle) => {
+  const editTodo = async (id, updates) => {
     try {
       const todoToUpdate = todos.find((t) => t.id === id);
       if (!todoToUpdate) return;
 
+      // Handle both old signature (id, title) and new (id, object)
+      const actualUpdates =
+        typeof updates === "string" ? { title: updates } : updates;
+
       const updated = await updateTodo(id, {
         ...todoToUpdate,
-        title: newTitle,
+        ...actualUpdates,
       });
       setTodos(todos.map((t) => (t.id === id ? updated : t)));
       return true;

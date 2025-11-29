@@ -4,6 +4,9 @@ class TodoBase(BaseModel):
     title: str
     description: str | None = None
     completed: bool = False
+    priority: str = "medium"
+    due_date: str | None = None
+    duration_minutes: int | None = None
 
 class TodoCreate(TodoBase):
     pass

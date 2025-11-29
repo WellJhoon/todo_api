@@ -3,29 +3,20 @@ import { ThemeToggle } from './ThemeToggle';
 
 export function Layout({ children }) {
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col items-center pt-12 px-4 transition-colors duration-300">
-      <div className="absolute top-4 right-4 z-50">
+    <div className="min-h-screen bg-background text-foreground flex justify-center pt-12 sm:pt-20 px-4 pb-10 transition-colors duration-300">
+      <div className="absolute top-6 right-6 z-50">
         <ThemeToggle />
       </div>
 
-      <div className="w-full max-w-sm space-y-8 relative z-10">
-        <div className="text-center pt-12 pb-6">
-          <h1 className="text-4xl font-bold text-foreground tracking-tight mb-2">
+      <div className="w-full max-w-[400px] space-y-6 relative">
+        <div className="px-2">
+          <h1 className="text-[34px] font-bold text-foreground tracking-tight leading-tight">
             Tasks
           </h1>
-          <p className="text-lg text-muted-foreground">
-            Stay organized
-          </p>
         </div>
 
-        <div className="bg-card rounded-3xl shadow-sm overflow-hidden divide-y divide-border border border-border/50">
+        <div className="bg-card rounded-[20px] shadow-sm overflow-visible border border-border/40">
           {children}
-        </div>
-        
-        <div className="text-center pt-4">
-          <p className="text-xs text-muted-foreground/60 font-normal">
-            Made with React & FastAPI
-          </p>
         </div>
       </div>
     </div>

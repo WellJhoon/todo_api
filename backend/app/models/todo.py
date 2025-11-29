@@ -8,3 +8,6 @@ class Todo(Base):
     title = Column(String, index=True)
     description = Column(String, index=True)
     completed = Column(Boolean, default=False)
+    priority = Column(String, default="medium")  # low, medium, high
+    due_date = Column(String, nullable=True)
+    duration_minutes = Column(Integer, nullable=True)

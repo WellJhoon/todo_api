@@ -1,85 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
-    /* iOS Light Mode */
-    --background: 240 5% 96%; /* System Grouped Background #F2F2F7 */
-    --foreground: 0 0% 0%; /* Label Color */
-
-    --card: 0 0% 100%; /* Secondary System Grouped Background (Cards) #FFFFFF */
-    --card-foreground: 0 0% 0%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-
-    --primary: 211 100% 50%; /* System Blue #007AFF */
+    /* iOS Light Mode Colors */
+    --background: 240 20% 99%;
+    --foreground: 240 10% 3.9%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 240 4% 90%; /* System Fill */
-    --secondary-foreground: 211 100% 50%;
-
-    --muted: 240 5% 96%;
-    --muted-foreground: 240 4% 46%; /* Secondary Label */
-
-    --accent: 211 100% 50%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 348 100% 60%; /* System Red #FF3B30 */
+    
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-
-    --border: 240 5% 84%; /* Separator #C6C6C8 */
-    --input: 240 5% 84%;
-    --ring: 211 100% 50%;
-
-    --radius: 0.75rem; /* iOS rounded corners approx 12px */
+    
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 221 83% 53%;
+    
+    --radius: 1rem;
   }
 
   .dark {
-    /* iOS Dark Mode */
-    --background: 0 0% 0%; /* System Background #000000 */
-    --foreground: 0 0% 100%;
-
-    --card: 240 2% 18%; /* Secondary System Grouped Background #1C1C1E */
-    --card-foreground: 0 0% 100%;
-
-    --popover: 240 2% 18%;
-    --popover-foreground: 0 0% 100%;
-
-    --primary: 211 100% 50%; /* System Blue Dark Mode #0A84FF */
+    /* iOS Dark Mode Colors */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 8%;
+    --card-foreground: 0 0% 98%;
+    
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 240 2% 18%;
-    --secondary-foreground: 0 0% 100%;
-
-    --muted: 240 2% 18%;
-    --muted-foreground: 240 5% 64%;
-
-    --accent: 211 100% 50%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 348 100% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 240 5% 26%; /* Separator Dark #38383A */
-    --input: 240 5% 26%;
-    --ring: 211 100% 50%;
-  }
-}
-
-@layer utilities {
-  .glass {
-    @apply bg-card/80 backdrop-blur-md border border-border shadow-xl;
-  }
-  .glass-input {
-    @apply bg-input border border-border focus:border-ring focus:ring-1 focus:ring-ring/20 transition-all duration-300;
-  }
-  .neon-glow {
-    box-shadow: 0 0 10px theme('colors.primary.DEFAULT'), 0 0 20px theme('colors.primary.DEFAULT');
-  }
-  .text-glow {
-    text-shadow: 0 0 10px theme('colors.primary.DEFAULT');
+    
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 221 83% 53%;
   }
 }
 
@@ -87,8 +68,31 @@
   * {
     @apply border-border;
   }
+  
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  }
+  
+  .glass-dark {
+    background: rgba(28, 28, 30, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  }
+  
+  .ios-shadow {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ios-shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   }
 }
