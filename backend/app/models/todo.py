@@ -11,3 +11,6 @@ class Todo(Base):
     priority = Column(String, default="medium")  # low, medium, high
     due_date = Column(String, nullable=True)
     duration_minutes = Column(Integer, nullable=True)
+    estimated_minutes = Column(Integer, nullable=True, default=0)
+    time_spent_minutes = Column(Integer, nullable=True, default=0)
+
