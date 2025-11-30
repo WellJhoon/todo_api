@@ -2,8 +2,6 @@
 
 Una aplicación moderna y completa para la gestión de tareas y proyectos, construida con **FastAPI** (Backend) y **React + Vite** (Frontend). Incluye autenticación segura, tableros Kanban, sistema de tickets y perfiles de usuario personalizables.
 
-![TaskMaster Pro Screenshot](https://via.placeholder.com/800x400?text=TaskMaster+Pro+Preview)
-
 ## 🚀 Características Principales
 
 ### 🔐 Autenticación y Seguridad
