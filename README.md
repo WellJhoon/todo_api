@@ -1,99 +1,135 @@
-# Todo API con FastAPI
+# TaskMaster Pro - Sistema de Gestión de Proyectos
 
-Esta es una API RESTful simple para gestionar una lista de tareas (To-Do List), construida con Python y FastAPI. Este proyecto sirve como backend para una futura aplicación de React.
+Una aplicación moderna y completa para la gestión de tareas y proyectos, construida con **FastAPI** (Backend) y **React + Vite** (Frontend). Incluye autenticación segura, tableros Kanban, sistema de tickets y perfiles de usuario personalizables.
 
-## Tecnologías
+![TaskMaster Pro Screenshot](https://via.placeholder.com/800x400?text=TaskMaster+Pro+Preview)
 
-*   **Python 3.10+**
-*   **FastAPI**: Framework web moderno y rápido.
-# Todo API con FastAPI
+## 🚀 Características Principales
 
-Esta es una API RESTful simple para gestionar una lista de tareas (To-Do List), construida con Python y FastAPI. Este proyecto sirve como backend para una futura aplicación de React.
+### 🔐 Autenticación y Seguridad
+*   **Registro y Login Seguro**: Sistema completo con hashing de contraseñas (Bcrypt) y tokens JWT.
+*   **Gestión de Sesiones**: Persistencia de sesión y protección de rutas privadas.
+*   **Privacidad de Datos**: Cada usuario tiene su propio espacio de trabajo aislado; las tareas son privadas.
 
-## Tecnologías
+### 👤 Perfil de Usuario
+*   **Avatar Personalizado**: Subida de imágenes de perfil con almacenamiento local.
+*   **Datos de Usuario**: Gestión de nombre, email y preferencias.
 
-*   **Python 3.10+**
-*   **FastAPI**: Framework web moderno y rápido.
-*   **SQLAlchemy**: ORM para la base de datos.
-*   **SQLite**: Base de datos ligera (archivo local `todos.db`).
-*   **Pydantic**: Validación de datos.
+### 📊 Gestión de Tareas Avanzada
+*   **Dashboard Interactivo**: Vista general con estadísticas, gráficos de productividad y KPIs.
+*   **Tablero Kanban**: Gestión visual de tareas con Drag & Drop (Por hacer, En progreso, Completado).
+*   **Sistema de Tickets**: Interfaz especializada para gestión de incidencias (Bugs, Features, Tasks) con asignación de usuarios.
+*   **Backlog**: Vista de lista clásica para gestión rápida.
 
-## Estructura del Proyecto
+### 🎨 Experiencia de Usuario (UX/UI)
+*   **Diseño Moderno**: Interfaz limpia estilo SaaS, inspirada en herramientas profesionales.
+*   **Modo Oscuro**: Soporte nativo para temas claro y oscuro.
+*   **Auto-Schedule**: Algoritmo inteligente que sugiere prioridades y fechas.
 
-El proyecto está organizado como un monorepo con backend y frontend separados:
+---
+
+## 🛠️ Tecnologías Utilizadas
+
+### Backend (Python)
+*   **FastAPI**: Framework de alto rendimiento para APIs.
+*   **SQLAlchemy**: ORM para gestión de base de datos SQLite.
+*   **Pydantic**: Validación de datos robusta.
+*   **JWT & Passlib**: Seguridad y autenticación.
+*   **Python-Multipart**: Manejo de subida de archivos.
+
+### Frontend (React)
+*   **React 18 + Vite**: Desarrollo rápido y optimizado.
+*   **Tailwind CSS**: Estilizado moderno y responsivo.
+*   **Lucide React**: Iconografía consistente.
+*   **Axios**: Comunicación con la API.
+*   **Context API**: Gestión de estado global (Auth).
+
+---
+
+## 📂 Estructura del Proyecto
 
 ```
 todo_api/
-├── backend/            # API REST (FastAPI)
-│   ├── app/            # Código fuente Python
-│   ├── requirements.txt
-│   └── todos.db        # Base de datos SQLite
-├── frontend/           # Cliente Web (React + Vite)
+├── backend/                # Servidor API
+│   ├── app/
+│   │   ├── api/            # Endpoints (v1)
+│   │   ├── core/           # Configuración y Seguridad
+│   │   ├── crud/           # Operaciones de Base de Datos
+│   │   ├── models/         # Modelos SQLAlchemy
+│   │   ├── schemas/        # Esquemas Pydantic
+│   │   └── static/         # Archivos subidos (imágenes)
+│   ├── todos.db            # Base de datos SQLite
+│   └── requirements.txt
+│
+├── frontend/               # Cliente Web
 │   ├── src/
-│   ├── public/
+│   │   ├── components/     # Componentes Reutilizables (Kanban, Sidebar, etc.)
+│   │   ├── context/        # AuthContext
+│   │   ├── services/       # Llamadas a API
+│   │   └── App.jsx         # Componente Principal
 │   └── package.json
 └── README.md
 ```
 
-## Instalación y Ejecución
+---
 
-### 1. Backend (Python/FastAPI)
+## ⚡ Instalación y Ejecución
 
-Navega a la carpeta `backend`:
+### 1. Configurar el Backend
 
 ```bash
 cd backend
-```
 
-Activa tu entorno virtual (si está en la raíz superior `../.venv`) e instala dependencias:
+# Crear entorno virtual (opcional pero recomendado)
+python -m venv venv
+# Windows: .\venv\Scripts\activate
+# Linux/Mac: source venv/bin/activate
 
-```bash
+# Instalar dependencias
 pip install -r requirements.txt
-```
 
-Ejecuta el servidor:
-
-```bash
-# Windows
+# Iniciar servidor
 py -m uvicorn app.main:app --reload
-
-# Linux/Mac
-uvicorn app.main:app --reload
+# El servidor correrá en http://127.0.0.1:8000
 ```
 
-El backend correrá en `http://127.0.0.1:8000`.
-
-### 2. Frontend (React)
-
-Navega a la carpeta `frontend`:
+### 2. Configurar el Frontend
 
 ```bash
-cd ../frontend
-# o desde la raíz: cd frontend
-```
+cd frontend
 
-Instala dependencias y ejecuta:
-
-```bash
+# Instalar dependencias
 npm install
+
+# Iniciar aplicación
 npm run dev
+# La app correrá en http://localhost:5173
 ```
 
-La aplicación web estará disponible en `http://localhost:5173`.
+---
 
-## Documentación de la API
+## 📚 Documentación de la API
 
-FastAPI genera documentación automática e interactiva:
+Una vez iniciado el backend, puedes acceder a la documentación interactiva:
 
-*   **Swagger UI**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) - Aquí puedes probar los endpoints directamente.
+*   **Swagger UI**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 *   **ReDoc**: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
 
-## Endpoints Principales
+### Endpoints Clave
 
-La API está prefijada con `/api/v1`.
+*   **Auth**:
+    *   `POST /api/v1/register`: Registrar nuevo usuario.
+    *   `POST /api/v1/login/access-token`: Obtener token JWT.
+*   **Usuarios**:
+    *   `GET /api/v1/users/me`: Obtener perfil actual.
+    *   `POST /api/v1/users/me/image`: Subir foto de perfil.
+*   **Tareas**:
+    *   `GET /api/v1/todos/`: Listar tareas del usuario.
+    *   `POST /api/v1/todos/`: Crear tarea.
+    *   `PUT /api/v1/todos/{id}`: Actualizar tarea (estado, info).
 
-*   `GET /api/v1/todos/`: Obtener todas las tareas.
-*   `POST /api/v1/todos/`: Crear una nueva tarea.
-*   `GET /api/v1/todos/{id}`: Obtener una tarea por ID.
-*   `PUT /api/v1/todos/{id}`: Actualizar una tarea.
-*   `DELETE /api/v1/todos/{id}`: Eliminar una tarea.
+---
+
+## 🤝 Contribución
+
+¡Las contribuciones son bienvenidas! Siéntete libre de abrir issues o enviar pull requests para mejorar el sistema.

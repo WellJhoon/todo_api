@@ -3,10 +3,11 @@ import { getTodos, createTodo, updateTodo, deleteTodo } from '@/services/api';
 import { Sidebar } from '@/components/Sidebar';
 import { DashboardView } from '@/components/DashboardView';
 import { KanbanBoard } from '@/components/KanbanBoard';
+import { TicketSystem } from '@/components/TicketSystem';
 import { SettingsView } from '@/components/SettingsView';
 import { TodoItem } from '@/components/TodoItem';
 import { AddTodo } from '@/components/AddTodo';
-import { Loader2, Plus, Moon, Sun } from 'lucide-react';
+import { Loader2, User } from 'lucide-react';
 import { 
   autoScheduleTasks, 
   autoAdjustOnAdd, 
@@ -20,7 +21,7 @@ export function MainApp() {
   const [currentView, setCurrentView] = useState('dashboard');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const { logout } = useAuth();
+  const { user } = useAuth();
 
   useEffect(() => {
     // Detectar preferencia de tema del sistema
@@ -148,21 +149,26 @@ export function MainApp() {
         {/* Top Header */}
         <header className="h-16 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between px-8 transition-colors duration-300">
           <h2 className="text-xl font-semibold text-slate-800 dark:text-white capitalize">
-            {currentView === 'backlog' ? 'Todas las Tareas' : currentView === 'kanban' ? 'Tablero Kanban' : currentView === 'settings' ? 'Configuración' : 'Dashboard General'}
+            {currentView === 'backlog' ? 'Todas las Tareas' : 
+             currentView === 'kanban' ? 'Tablero Kanban' : 
+             currentView === 'tickets' ? 'Sistema de Tickets' :
+             currentView === 'settings' ? 'Configuración' : 'Dashboard General'}
           </h2>
           
           <div className="flex items-center gap-4">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {darkMode ? (
-                <Sun className="h-5 w-5 text-yellow-500" />
-              ) : (
-                <Moon className="h-5 w-5 text-slate-600" />
-              )}
-            </button>
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden border border-slate-200 dark:border-slate-600 flex items-center justify-center">
+                {user?.avatar ? (
+                  <img 
+                    src={`http://127.0.0.1:8000${user.avatar}`} 
+                    alt="Profile" 
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <User className="h-5 w-5 text-slate-400" />
+                )}
+              </div>
+            </div>
           </div>
         </header>
 
@@ -184,6 +190,23 @@ export function MainApp() {
                   if (task) handleToggleTodo(task);
                 }}
                 onDelete={handleDeleteTodo}
+              />
+            </div>
+          )}
+
+          {currentView === 'tickets' && (
+            <div className="animate-in fade-in duration-500">
+              <TicketSystem 
+                todos={todos}
+                onStatusChange={(id, updates) => {
+                  const task = todos.find(t => t.id === id);
+                  if (task) handleStatusChange(task, updates);
+                }}
+                onEdit={(id) => {
+                  const task = todos.find(t => t.id === id);
+                  if (task) handleToggleTodo(task);
+                }}
+                onAdd={() => setIsAddModalOpen(true)}
               />
             </div>
           )}

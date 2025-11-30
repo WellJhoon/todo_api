@@ -8,7 +8,9 @@ def get_user_by_email(db: Session, email: str):
 
 def create_user(db: Session, user: UserCreate):
     hashed_password = get_password_hash(user.password)
-    db_user = User(email=user.email, hashed_password=hashed_password)
+    # Excluir password del dict para no pasarlo plano, y pasar el hashed
+    user_data = user.dict(exclude={"password"})
+    db_user = User(**user_data, hashed_password=hashed_password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

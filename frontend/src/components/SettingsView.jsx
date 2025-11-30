@@ -75,9 +75,9 @@ export function SettingsView({ darkMode, toggleTheme }) {
       <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 flex items-center gap-6">
         <div className="relative group">
           <div className="h-20 w-20 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center overflow-hidden border-2 border-slate-200 dark:border-slate-600">
-            {user?.profile_image ? (
+            {user?.avatar ? (
               <img 
-                src={`http://127.0.0.1:8000${user.profile_image}`} 
+                src={`http://127.0.0.1:8000${user.avatar}`} 
                 alt="Profile" 
                 className="h-full w-full object-cover"
               />

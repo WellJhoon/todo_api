@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
-import { CheckSquare, ArrowRight, Loader2, Mail, Lock } from 'lucide-react';
+import { CheckSquare, ArrowRight, Loader2, Mail, Lock, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export function LoginView() {
   const [isLogin, setIsLogin] = useState(true);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -19,7 +20,7 @@ export function LoginView() {
     try {
       const result = isLogin 
         ? await login(email, password)
-        : await register(email, password);
+        : await register(name, email, password);
 
       if (!result.success) {
         setError(result.error);
@@ -57,6 +58,23 @@ export function LoginView() {
           )}
 
           <div className="space-y-4">
+            {!isLogin && (
+              <div className="group animate-in slide-in-from-top-2">
+                <label className="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1.5 ml-1">Nombre</label>
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl py-3 pl-10 pr-4 outline-none focus:border-blue-500 dark:focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-slate-900 dark:text-white"
+                    placeholder="Tu nombre"
+                    required={!isLogin}
+                  />
+                </div>
+              </div>
+            )}
+
             <div className="group">
               <label className="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1.5 ml-1">Email</label>
               <div className="relative">

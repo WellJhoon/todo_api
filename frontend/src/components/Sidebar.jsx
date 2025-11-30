@@ -1,11 +1,12 @@
 import React from 'react';
-import { LayoutDashboard, KanbanSquare, ListTodo, Settings, Plus, CheckSquare } from 'lucide-react';
+import { LayoutDashboard, KanbanSquare, ListTodo, Ticket, Settings, Plus, CheckSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export function Sidebar({ currentView, onViewChange, onAddClick }) {
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'kanban', label: 'Tablero Kanban', icon: KanbanSquare },
+    { id: 'tickets', label: 'Sistema de Tickets', icon: Ticket },
     { id: 'backlog', label: 'Todas las Tareas', icon: ListTodo },
   ];
 
