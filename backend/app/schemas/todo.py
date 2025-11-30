@@ -18,6 +18,8 @@ class TodoBase(BaseModel):
 class TodoCreate(TodoBase):
     pass
 
+from beanie import PydanticObjectId
+
 class TodoUpdate(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
@@ -29,10 +31,10 @@ class TodoUpdate(BaseModel):
     time_spent_minutes: Optional[int] = None
     status: Optional[str] = None
     ticket_type: Optional[str] = None
-    assignee_id: Optional[int] = None
+    assignee_id: Optional[PydanticObjectId] = None
 
 class Todo(TodoBase):
-    id: int
+    id: PydanticObjectId
     created_at: datetime
 
     class Config:

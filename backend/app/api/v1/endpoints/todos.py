@@ -1,62 +1,66 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
 from typing import List
-
-from app import crud, schemas
+from fastapi import APIRouter, Depends, HTTPException
+from app import schemas
 from app.api import deps
+from app.models.user import User
+from app.models.todo import Todo
+from beanie import PydanticObjectId
 
 router = APIRouter()
 
-from app.models.user import User
-
 @router.post("/", response_model=schemas.Todo)
-def create_todo(
+async def create_todo(
     todo: schemas.TodoCreate, 
-    db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user)
 ):
-    return crud.create_todo(db=db, todo=todo, owner_id=current_user.id)
+    db_todo = Todo(**todo.dict(), owner_id=current_user.id)
+    await db_todo.create()
+    return db_todo
 
 @router.get("/", response_model=List[schemas.Todo])
-def read_todos(
+async def read_todos(
     skip: int = 0, 
     limit: int = 100, 
-    db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user)
 ):
-    todos = crud.get_todos(db, owner_id=current_user.id, skip=skip, limit=limit)
+    todos = await Todo.find(Todo.owner_id == current_user.id).skip(skip).limit(limit).to_list()
     return todos
 
 @router.get("/{todo_id}", response_model=schemas.Todo)
-def read_todo(
-    todo_id: int, 
-    db: Session = Depends(deps.get_db),
+async def read_todo(
+    todo_id: PydanticObjectId, 
     current_user: User = Depends(deps.get_current_user)
 ):
-    db_todo = crud.get_todo(db, todo_id=todo_id, owner_id=current_user.id)
-    if db_todo is None:
+    todo = await Todo.find_one(Todo.id == todo_id, Todo.owner_id == current_user.id)
+    if not todo:
         raise HTTPException(status_code=404, detail="Tarea no encontrada")
-    return db_todo
+    return todo
 
 @router.put("/{todo_id}", response_model=schemas.Todo)
-def update_todo(
-    todo_id: int, 
-    todo: schemas.TodoUpdate, 
-    db: Session = Depends(deps.get_db),
+async def update_todo(
+    todo_id: PydanticObjectId, 
+    todo_in: schemas.TodoUpdate, 
     current_user: User = Depends(deps.get_current_user)
 ):
-    db_todo = crud.update_todo(db, todo_id=todo_id, todo=todo, owner_id=current_user.id)
-    if db_todo is None:
+    todo = await Todo.find_one(Todo.id == todo_id, Todo.owner_id == current_user.id)
+    if not todo:
         raise HTTPException(status_code=404, detail="Tarea no encontrada")
-    return db_todo
+    
+    update_data = todo_in.dict(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(todo, field, value)
+    
+    await todo.save()
+    return todo
 
 @router.delete("/{todo_id}", response_model=schemas.Todo)
-def delete_todo(
-    todo_id: int, 
-    db: Session = Depends(deps.get_db),
+async def delete_todo(
+    todo_id: PydanticObjectId, 
     current_user: User = Depends(deps.get_current_user)
 ):
-    db_todo = crud.delete_todo(db, todo_id=todo_id, owner_id=current_user.id)
-    if db_todo is None:
+    todo = await Todo.find_one(Todo.id == todo_id, Todo.owner_id == current_user.id)
+    if not todo:
         raise HTTPException(status_code=404, detail="Tarea no encontrada")
-    return db_todo
+    
+    await todo.delete()
+    return todo

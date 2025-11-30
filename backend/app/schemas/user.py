@@ -19,8 +19,10 @@ class UserUpdate(BaseModel):
     color: Optional[str] = None
     is_active: Optional[bool] = None
 
+from beanie import PydanticObjectId
+
 class User(UserBase):
-    id: int
+    id: PydanticObjectId
     created_at: Optional[datetime] = None
 
     class Config:

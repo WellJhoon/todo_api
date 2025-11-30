@@ -14,6 +14,7 @@ import {
   autoAdjustOnComplete 
 } from '@/utils/autoScheduler';
 import { useAuth } from '@/context/AuthContext';
+import { getImageUrl } from '@/config';
 
 export function MainApp() {
   const [todos, setTodos] = useState([]);
@@ -157,10 +158,18 @@ export function MainApp() {
           
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-3">
+              <div className="text-right hidden md:block">
+                <p className="text-sm font-medium text-slate-900 dark:text-white">
+                  {user?.name || user?.email?.split('@')[0]}
+                </p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  {user?.email}
+                </p>
+              </div>
               <div className="h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden border border-slate-200 dark:border-slate-600 flex items-center justify-center">
                 {user?.avatar ? (
                   <img 
-                    src={`http://127.0.0.1:8000${user.avatar}`} 
+                    src={getImageUrl(user.avatar)} 
                     alt="Profile" 
                     className="h-full w-full object-cover"
                   />

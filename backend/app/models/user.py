@@ -1,20 +1,16 @@
-from sqlalchemy import Column, Integer, String, DateTime, Boolean
-from sqlalchemy.orm import relationship
-from sqlalchemy.sql import func
-from app.db.base_class import Base
+from typing import Optional
+from datetime import datetime
+from beanie import Document, Indexed
+from pydantic import Field
 
-class User(Base):
-    __tablename__ = "users"
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-    email = Column(String, unique=True, index=True, nullable=False)
-    hashed_password = Column(String, nullable=False)
-    avatar = Column(String, nullable=True)
-    color = Column(String, default="bg-blue-500")
-    is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+class User(Document):
+    name: str
+    email: Indexed(str, unique=True) # type: ignore
+    hashed_password: str
+    avatar: Optional[str] = None
+    color: str = "bg-blue-500"
+    is_active: bool = True
+    created_at: datetime = Field(default_factory=datetime.now)
     
-    # Relationship
-    assigned_tickets = relationship("Todo", foreign_keys="Todo.assignee_id", back_populates="assignee")
-    todos = relationship("Todo", foreign_keys="Todo.owner_id", back_populates="owner")
+    class Settings:
+        name = "users"

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { User, Calendar, Flag, MessageSquare, Plus, Search, Filter } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getUsers } from '@/services/userApi';
+import { getImageUrl } from '@/config';
 
 export function TicketSystem({ todos, onStatusChange, onEdit, onAdd }) {
   const [selectedAssignee, setSelectedAssignee] = useState('all');
@@ -183,8 +184,16 @@ export function TicketSystem({ todos, onStatusChange, onEdit, onAdd }) {
                   </div>
 
                   {/* Avatar del asignado */}
-                  <div className={cn("w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white", assignee.color)}>
-                    {assignee.avatar}
+                  <div className={cn("w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white overflow-hidden", assignee.color)}>
+                    {assignee.avatar && (assignee.avatar.startsWith('/') || assignee.avatar.startsWith('http')) ? (
+                      <img 
+                        src={getImageUrl(assignee.avatar)} 
+                        alt={assignee.name} 
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      assignee.avatar || '?'
+                    )}
                   </div>
                 </div>
 

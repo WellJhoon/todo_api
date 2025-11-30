@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Moon, Sun, Monitor, Bell, Shield, User, HelpCircle, LogOut, Camera } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/context/AuthContext';
+import { getImageUrl } from '@/config';
 
 export function SettingsView({ darkMode, toggleTheme }) {
   const { user, logout, updateProfileImage } = useAuth();
@@ -77,7 +78,7 @@ export function SettingsView({ darkMode, toggleTheme }) {
           <div className="h-20 w-20 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center overflow-hidden border-2 border-slate-200 dark:border-slate-600">
             {user?.avatar ? (
               <img 
-                src={`http://127.0.0.1:8000${user.avatar}`} 
+                src={getImageUrl(user.avatar)} 
                 alt="Profile" 
                 className="h-full w-full object-cover"
               />

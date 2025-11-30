@@ -2,7 +2,8 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Todo API"
-    SQLALCHEMY_DATABASE_URL: str = "sqlite:///./todos.db"
+    API_V1_STR: str = "/api/v1"
+    MONGO_URL: str
     
     SECRET_KEY: str = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7" # Change this in production!
     ALGORITHM: str = "HS256"
@@ -10,5 +11,6 @@ class Settings(BaseSettings):
 
     class Config:
         case_sensitive = True
+        env_file = ".env"
 
 settings = Settings()
